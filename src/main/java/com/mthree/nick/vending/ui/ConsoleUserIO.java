@@ -1,8 +1,10 @@
 package com.mthree.nick.vending.ui;
 
 import com.mthree.nick.vending.dao.NoItemInventoryException;
+import com.mthree.nick.vending.service.Item;
 
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleUserIO {
@@ -31,5 +33,14 @@ public class ConsoleUserIO {
             }
         }
         return new BigDecimal("0");
+    }
+
+    public String choose() {
+        System.out.println("Choose an item: ");
+        return console.nextLine();
+    }
+
+    public String pause() {
+        return console.nextLine();
     }
 }

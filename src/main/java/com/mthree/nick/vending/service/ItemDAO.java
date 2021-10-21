@@ -14,25 +14,30 @@ import java.util.Scanner;
 public class ItemDAO implements ItemInterfaceDAO {
     //CRUD operations
     private HashMap<String, Item> inventory;
-    private String FILENAME = "items.txt";
+    private String FILENAME = "item.txt";
 
     public void vendItem(String name) {
 
     }
 
     //read vending machine file
-    public boolean load() {
+    public HashMap<String, Item> load() throws InvalidFileFormat {
+        this.inventory = new HashMap<String, Item>();
         try{
             Scanner sc = new Scanner(new BufferedReader(new FileReader(FILENAME)));
+            sc.useDelimiter(",|\r\n|\r");
             while (sc.hasNextLine()) {
                 //String line = sc.nextLine();
+                if (sc.hasNextLine() && !sc.hasNext()) {
+                    break;
+                }
                 Item itemTemp = unmarshall(sc);
                 this.inventory.put(itemTemp.getName(), itemTemp);
             }
-            return true;
+            return this.inventory;
         }
         catch (InvalidFileFormat | FileNotFoundException e) {
-            return false;
+            throw new InvalidFileFormat("Invalid format");
         }
     }
 
@@ -71,12 +76,12 @@ public class ItemDAO implements ItemInterfaceDAO {
         String finalString = "";
 
         for (String i: inv.keySet()) {
-            finalString += "\n";
             finalString += i;
             finalString += "," + inv.get(i).getPrice();
             finalString += "," + inv.get(i).getStockInventory();
+            finalString += "\r\n";
         }
-
+        //finalString = finalString.substring(0, finalString.length() - 1);
         return finalString;
     }
 }

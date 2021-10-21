@@ -1,0 +1,5 @@
+Mars,0.80,10
+Twix,0.55,10
+Coke,1.29,5
+Mountain Dew,1.00,0
+Doritos,0.70,1
