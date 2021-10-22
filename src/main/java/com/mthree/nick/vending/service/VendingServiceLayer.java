@@ -1,5 +1,7 @@
 package com.mthree.nick.vending.service;
 
+import com.mthree.nick.vending.dto.Item;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 

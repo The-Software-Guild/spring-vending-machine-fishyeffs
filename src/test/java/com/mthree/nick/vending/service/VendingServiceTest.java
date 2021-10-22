@@ -1,22 +1,30 @@
 package com.mthree.nick.vending.service;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class VendingServiceTest {
 
-    @org.junit.jupiter.api.Test
+
+    @Test
     void getInventory() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getItemDetails() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void inStock() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void sufficientMoney() {
+    }
+
+    @Test
+    void audit() {
+
     }
 }

@@ -3,8 +3,8 @@ package com.mthree.nick.vending.controller;
 import com.mthree.nick.vending.dao.InsufficientFundsException;
 import com.mthree.nick.vending.dao.InvalidFileFormat;
 import com.mthree.nick.vending.dao.NoItemInventoryException;
-import com.mthree.nick.vending.service.Item;
-import com.mthree.nick.vending.service.ItemDAO;
+import com.mthree.nick.vending.dto.Item;
+import com.mthree.nick.vending.dao.ItemDAO;
 import com.mthree.nick.vending.service.VendingService;
 import com.mthree.nick.vending.ui.VendingView;
 
@@ -31,6 +31,7 @@ public class VendingController {
             vendingService.setInventory(itemDAO.load());
         }
         catch (InvalidFileFormat e) {
+
             System.out.println("Invalid file format");
             System.exit(0);
         }
@@ -46,6 +47,10 @@ public class VendingController {
 
         } while (!exit);
         itemDAO.save();
+    }
+
+    public void audit(String filename) {
+        itemDAO.audit(filename);
     }
 
     private boolean insert() {

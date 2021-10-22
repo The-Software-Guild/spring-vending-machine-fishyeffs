@@ -1,10 +1,6 @@
 package com.mthree.nick.vending.ui;
 
-import com.mthree.nick.vending.dao.NoItemInventoryException;
-import com.mthree.nick.vending.service.Item;
-
 import java.math.BigDecimal;
-import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleUserIO {

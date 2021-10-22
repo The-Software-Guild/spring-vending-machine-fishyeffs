@@ -1,5 +1,6 @@
 package com.mthree.nick.vending.service;
 
+import com.mthree.nick.vending.dto.Item;
 import com.mthree.nick.vending.enums.Coins;
 
 import java.math.BigDecimal;

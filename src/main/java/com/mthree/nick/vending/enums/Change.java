@@ -5,10 +5,15 @@ import java.math.BigInteger;
 
 public class Change {
     private final Coins[] coins = new Coins[8];
-
+    private final int coinCount[] = new int[8];
     public Change(BigDecimal payment) {
         fillCoinTree();
+
         coinChange(0, payment, coins, "");
+
+        for (int i = 0; i < coinCount.length; i++) {
+            System.out.println(coinCount[i]);
+        }
     }
 
     private void fillCoinTree() {
@@ -25,7 +30,7 @@ public class Change {
     private BigDecimal coinChange(int curCoin, BigDecimal remaining,
                                  Coins[] coins, String paid) {
         if (remaining.compareTo(new BigDecimal("0.00")) == 0) {
-            System.out.println(paid);
+            //System.out.println(paid);
             return new BigDecimal("1");
         }
         if (remaining.compareTo(new BigDecimal("0.00")) < 0) {
@@ -34,6 +39,7 @@ public class Change {
 
         BigDecimal res = new BigDecimal(BigInteger.ZERO);
         for (int i = curCoin; i < coins.length; i++) {
+            this.coinCount[i] += 1;
             res = res.add(coinChange(i, remaining.subtract(coins[i].getNumVal()),coins,
                     paid + coins[i].getName() +", "));
 

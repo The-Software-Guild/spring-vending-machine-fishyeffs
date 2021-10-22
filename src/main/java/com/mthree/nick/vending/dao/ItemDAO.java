@@ -1,11 +1,13 @@
-package com.mthree.nick.vending.service;
+package com.mthree.nick.vending.dao;
 
 import com.mthree.nick.vending.dao.InvalidFileFormat;
 import com.mthree.nick.vending.dao.ItemInterfaceDAO;
-import com.mthree.nick.vending.dao.NoItemInventoryException;
+import com.mthree.nick.vending.dto.Item;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -83,5 +85,23 @@ public class ItemDAO implements ItemInterfaceDAO {
         }
         //finalString = finalString.substring(0, finalString.length() - 1);
         return finalString;
+    }
+
+    public boolean audit(String filename) {
+        LocalDate ld = LocalDate.now();
+        try {
+            PrintWriter out = new PrintWriter(new FileWriter(filename));
+            out.append("\n[" + LocalDate.now() + "]");
+            out.append("[" + LocalTime.now() + "]");
+            out.append("Failure to write.");
+            out.flush();
+            out.close();
+            System.out.println("Written " + inventory.size() + " item(s) to " + FILENAME);
+            this.inventory.clear();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

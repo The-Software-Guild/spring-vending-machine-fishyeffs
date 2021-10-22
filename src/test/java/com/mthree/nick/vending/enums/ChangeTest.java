@@ -7,6 +7,6 @@ import java.math.BigDecimal;
 class ChangeTest {
     @Test
     void Change() {
-        Change change = new Change(new BigDecimal("0.06"));
+        Change change = new Change(new BigDecimal("0.01"));
     }
 }

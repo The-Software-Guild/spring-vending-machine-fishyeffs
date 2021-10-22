@@ -1,10 +1,9 @@
 package com.mthree.nick.vending.ui;
 
-import com.mthree.nick.vending.service.Item;
+import com.mthree.nick.vending.dto.Item;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.Map;
 
 public class VendingView {
     private ConsoleUserIO io;

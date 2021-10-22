@@ -1,4 +1,4 @@
-package com.mthree.nick.vending.service;
+package com.mthree.nick.vending.dto;
 
 import java.math.BigDecimal;
 
