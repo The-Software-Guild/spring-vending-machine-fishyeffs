@@ -1,14 +1,31 @@
 package com.mthree.nick.vending.service;
 
+import com.mthree.nick.vending.dao.InvalidFileFormat;
+import com.mthree.nick.vending.dao.ItemDAO;
+import com.mthree.nick.vending.dao.ItemInterfaceDAO;
 import com.mthree.nick.vending.dto.Item;
 import com.mthree.nick.vending.enums.Coins;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 
-public class VendingService implements VendingServiceLayer {
+@Component
+public class VendingService implements VendingServiceLayer, ItemInterfaceDAO {
     //contains logic and non CRUD operations
+    ItemDAO iDao;
+
+    @Autowired
+    public VendingService(ItemDAO dao) {
+        this.iDao = dao;
+    }
 
     private HashMap<String, Item> inventory;
 
@@ -78,5 +95,19 @@ public class VendingService implements VendingServiceLayer {
             }
         }
         return BigDecimal.ZERO;
+    }
+
+    @Override
+    public HashMap<String, Item> load() throws InvalidFileFormat {
+        return iDao.load();
+    }
+
+    @Override
+    public boolean save() {
+        return iDao.save();
+    }
+
+    public boolean audit(String filename, String message) {
+        return iDao.audit(filename, message);
     }
 }

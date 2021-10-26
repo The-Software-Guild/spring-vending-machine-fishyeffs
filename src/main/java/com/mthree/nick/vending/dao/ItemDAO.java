@@ -3,6 +3,7 @@ package com.mthree.nick.vending.dao;
 import com.mthree.nick.vending.dao.InvalidFileFormat;
 import com.mthree.nick.vending.dao.ItemInterfaceDAO;
 import com.mthree.nick.vending.dto.Item;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -13,14 +14,11 @@ import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
+@Component
 public class ItemDAO implements ItemInterfaceDAO {
     //CRUD operations
     private HashMap<String, Item> inventory;
     private String FILENAME = "item.txt";
-
-    public void vendItem(String name) {
-
-    }
 
     //read vending machine file
     public HashMap<String, Item> load() throws InvalidFileFormat {
@@ -87,7 +85,7 @@ public class ItemDAO implements ItemInterfaceDAO {
         return finalString;
     }
 
-    public boolean audit(String filename) {
+    public boolean audit(String filename, String message) {
         LocalDate ld = LocalDate.now();
         try {
             PrintWriter out = new PrintWriter(new FileWriter(filename));

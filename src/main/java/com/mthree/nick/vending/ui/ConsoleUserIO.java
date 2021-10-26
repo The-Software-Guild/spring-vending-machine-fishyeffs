@@ -1,8 +1,11 @@
 package com.mthree.nick.vending.ui;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+@Component
 public class ConsoleUserIO {
     final private Scanner console = new Scanner(System.in);
 
