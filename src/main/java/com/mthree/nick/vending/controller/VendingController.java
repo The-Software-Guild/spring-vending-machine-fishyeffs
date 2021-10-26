@@ -7,28 +7,31 @@ import com.mthree.nick.vending.dto.Item;
 import com.mthree.nick.vending.dao.ItemDAO;
 import com.mthree.nick.vending.service.VendingService;
 import com.mthree.nick.vending.ui.VendingView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
 
+@Component
 public class VendingController {
     private final VendingView view;
     private final VendingService vendingService;
-    private final ItemDAO itemDAO;
+
     private BigDecimal change;
     private String itemChoice;
 
+    @Autowired
     public VendingController(VendingService itemService, ItemDAO itemDAO, VendingView view) {
         this.vendingService = itemService;
-        this.itemDAO = itemDAO;
         this.view = view;
     }
 
     public void run() {
         boolean exit = false;
         try {
-            vendingService.setInventory(itemDAO.load());
+            vendingService.setInventory(vendingService.load());
         }
         catch (InvalidFileFormat e) {
 
@@ -46,11 +49,11 @@ public class VendingController {
             vend();
 
         } while (!exit);
-        itemDAO.save();
+        vendingService.save();
     }
 
-    public void audit(String filename) {
-        itemDAO.audit(filename);
+    public void audit(String filename, String message) {
+        vendingService.audit(filename, message);
     }
 
     private boolean insert() {

@@ -1,13 +1,17 @@
 package com.mthree.nick.vending.ui;
 
 import com.mthree.nick.vending.dto.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+@Component
 public class VendingView {
     private ConsoleUserIO io;
 
+    @Autowired
     public VendingView(ConsoleUserIO io) {
         this.io = io;
     }
